@@ -99,7 +99,6 @@ stages:
             steps:
               - download: current
                 artifact: Extension
-                path: MyExtension # In a DG this should be ignore and pipeline creation should not fail
                 patterns: '**/*.txt'
               - powershell: |
                   ls $(Pipeline.Workspace)/
