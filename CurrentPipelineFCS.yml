@@ -50,24 +50,24 @@ stages:
           Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
         displayName: Scorch workspace
 
-# - stage: Deploy
-#   displayName: Deploy stage
-#   jobs:  
-#   - deployment: Deploy0
-#     displayName: Upload New Artifact
-#     pool: hosted
-#     environment: Environment01
-#     strategy:
-#         runOnce:
-#           deploy:
-#             steps:
-#               - download: none
-#               - checkout: self
-#               - task: PublishBuildArtifacts@1
-#                 displayName: Create Artifact
-#                 inputs:
-#                   artifactName: Extension
-#                   pathToPublish: BVT\Extension
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:  
+  - deployment: Deploy0
+    displayName: Upload New Artifact
+    pool: hosted
+    environment: Environment01
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - download: none
+              - checkout: self
+              - task: PublishBuildArtifacts@1
+                displayName: Create Artifact
+                inputs:
+                  artifactName: Extension
+                  pathToPublish: BVT\Extension
 
 #   - deployment: Deploy1
 #     displayName: Download All Artifacts
