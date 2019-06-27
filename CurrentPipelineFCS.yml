@@ -37,18 +37,18 @@ stages:
           Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
         displayName: Scorch workspace
 
-#   - job: DownloadParticularArtifactJob
-#     pool: Hosted
-#     steps:
-#       - download: current
-#         artifact: Artifact1
-#       - powershell: |
-#           ls $(Pipeline.Workspace)/
-#           ls $(Pipeline.Workspace)/Artifact1
-#           ls $(Pipeline.Workspace)/Artifact1/a.txt
-#       - powershell: |
-#           Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-#         displayName: Scorch workspace
+  - job: DownloadParticularArtifactJob
+    pool: Hosted
+    steps:
+      - download: current
+        artifact: Artifact1
+      - powershell: |
+          ls $(Pipeline.Workspace)/
+          ls $(Pipeline.Workspace)/Artifact1
+          ls $(Pipeline.Workspace)/Artifact1/a.txt
+      - powershell: |
+          Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
+        displayName: Scorch workspace
 
 # - stage: Deploy
 #   displayName: Deploy stage
