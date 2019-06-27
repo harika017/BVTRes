@@ -61,7 +61,7 @@ stages:
         runOnce:
           deploy:
             steps:
-              - download: none
+              #- download: none
               - checkout: self
               - task: PublishBuildArtifacts@1
                 displayName: Create Artifact
