@@ -1,54 +1,54 @@
 #trigger: none
 
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:  
-  - job: Build
-    displayName: Build job
-    pool: Hosted
-    steps:
-    - script: echo Hello, world! This is CI job
-      displayName: 'Run a one-line script'
+# - stage: Build
+#   displayName: Build stage
+#   jobs:  
+#   - job: Build
+#     displayName: Build job
+#     pool: Hosted
+#     steps:
+#     - script: echo Hello, world! This is CI job
+#       displayName: 'Run a one-line script'
 
-    - task: PublishBuildArtifacts@1
-      displayName: Create Artifact
-      inputs:
-        artifactName: Artifact1
-        pathToPublish: BVT\testFolder
+#     - task: PublishBuildArtifacts@1
+#       displayName: Create Artifact
+#       inputs:
+#         artifactName: Artifact1
+#         pathToPublish: BVT\testFolder
 
-- stage: QA
-  displayName: QA stage
-  jobs:
-  - job: NoArtifactJob
-    pool: Hosted
-    steps:
-      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+# - stage: QA
+#   displayName: QA stage
+#   jobs:
+#   - job: NoArtifactJob
+#     pool: Hosted
+#     steps:
+#       - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
 
-  - job: DownloadAllArtifactJob
-    pool: Hosted
-    steps:
-      - download: current
-      - powershell: |
-          ls $(Pipeline.Workspace)/
-          ls $(Pipeline.Workspace)/Artifact1
-          ls $(Pipeline.Workspace)/Artifact1/a.txt
-      - powershell: |
-          Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-        displayName: Scorch workspace
+#   - job: DownloadAllArtifactJob
+#     pool: Hosted
+#     steps:
+#       - download: current
+#       - powershell: |
+#           ls $(Pipeline.Workspace)/
+#           ls $(Pipeline.Workspace)/Artifact1
+#           ls $(Pipeline.Workspace)/Artifact1/a.txt
+#       - powershell: |
+#           Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
+#         displayName: Scorch workspace
 
-  - job: DownloadParticularArtifactJob
-    pool: Hosted
-    steps:
-      - download: current
-        artifact: Artifact1
-      - powershell: |
-          ls $(Pipeline.Workspace)/
-          ls $(Pipeline.Workspace)/Artifact1
-          ls $(Pipeline.Workspace)/Artifact1/a.txt
-      - powershell: |
-          Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-        displayName: Scorch workspace
+#   - job: DownloadParticularArtifactJob
+#     pool: Hosted
+#     steps:
+#       - download: current
+#         artifact: Artifact1
+#       - powershell: |
+#           ls $(Pipeline.Workspace)/
+#           ls $(Pipeline.Workspace)/Artifact1
+#           ls $(Pipeline.Workspace)/Artifact1/a.txt
+#       - powershell: |
+#           Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
+#         displayName: Scorch workspace
 
 - stage: Deploy
   displayName: Deploy stage
